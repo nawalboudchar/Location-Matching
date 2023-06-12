@@ -25,21 +25,21 @@ Training and test take about 7 hours.
 
 Before all I split data into train set (75%) and test set (25%) and filled in missing values, then to predict which place entries represent the same point-of-interest (POI) I proceeded as follows:
 
-**Step 1: Candidates Generation**
+**Step 1: Candidates Generation**<br>
 Extracting 30 location neighbors (i.e. match candidates) for each entry using Ball Tree algorithm.
 
-**Step 2: Feature Engineering**
-Creating 71 new features based on the features of each entry and its match candidate (i.e. each pair id and id_match) such as:
-    - Cosine similarity between text fields like name, address, city, category, country, etc.
-    - Longest common subsequence between text fields.
-    - Latitude longitude distance.
-    - Latitude longitude rank.
+**Step 2: Feature Engineering**<br>
+Creating 71 new features based on the features of each entry and its match candidate (i.e. each pair id and id_match) such as:<br>
+    - Cosine similarity between text fields like name, address, city, category, country, etc.<br>
+    - Longest common subsequence between text fields.<br>
+    - Latitude longitude distance.<br>
+    - Latitude longitude rank.<br>
     - Levenshtein distance between text features.
 
-**Step 3: Matching**
+**Step 3: Matching**<br>
 Developing a binary classification LightGBM model using a matching threshold equals 0.5 and binary_logloss loss function.
 
-**Step 4: Post-processing**
+**Step 4: Post-processing**<br>
 Adding the inverse type of pairs that may be missing from the matches list. For example, if A B is a match, then B A should also be a match. In other words, if B exists in A matches list, then A should exist in B matches list.
 
 
